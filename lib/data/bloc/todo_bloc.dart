@@ -15,6 +15,10 @@ class TodoBloc implements BlocContract {
     : this._repository = repository;
 
 
+  List<Todo> findAllCompleted() {
+    return _repository.findCompleted();
+  }
+
   void add(String value) {
     _repository.add(value);
 

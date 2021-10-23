@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:todo_bloc_app/data/models/todo.dart';
+import 'package:todo_bloc_app/pages/todo_completed_page.dart';
 
 import 'package:todo_bloc_app/widgets/todo_item.dart';
 import 'package:todo_bloc_app/data/bloc_provider.dart';
@@ -17,6 +18,23 @@ class TodoPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('To-do App'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.check_circle, color: Colors.green[400]),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) {
+                    final todosCompleted = BlocProvider.of<TodoBloc>(context).findAllCompleted();
+
+                    return TodoCompletedPage(todosCompleted);
+                  }
+                )
+              );
+            },
+          )
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10.0),
@@ -35,7 +53,6 @@ class TodoPage extends StatelessWidget {
                       Expanded(
                         child: TextFormField(
                           controller: _textFieldController,
-                          autofocus: true,
                           onChanged: (String value) {
                             BlocProvider.of<TodoFormBloc>(context).onTextChange(value);
                           },

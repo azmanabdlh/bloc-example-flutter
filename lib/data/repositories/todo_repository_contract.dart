@@ -6,5 +6,7 @@ abstract class TodoRepositoryContract {
 
   void toggle(int index);
 
+  List<Todo> findCompleted();
+
   List<Todo> all();
 }

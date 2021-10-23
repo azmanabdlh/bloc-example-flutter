@@ -11,6 +11,10 @@ class TodoLocalStorageRepository implements TodoRepositoryContract {
     );
   }
 
+  List<Todo> findCompleted() {
+    return todos.where((Todo todo) => todo.isCompleted).toList();
+  }
+
   void toggle(int index) {
     todos[index].toggleCompleted();
   }
